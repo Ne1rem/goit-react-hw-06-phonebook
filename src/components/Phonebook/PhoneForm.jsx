@@ -20,9 +20,10 @@ const schema = Yup.object().shape({
     .max(50, 'Too Long!'),
 });
 
-export const PhoneForm = ({  }) => {
-  const [value, setValue]= useState('')
+export const PhoneForm = () => {
+  const [valueForm, setValueForm]= useState('')
   const dispatch =useDispatch()
+  
   return (
     <Formik
       initialValues={{
@@ -31,7 +32,7 @@ export const PhoneForm = ({  }) => {
       }}
       validationSchema={schema}
       onSubmit={(actions,evt) => {
-        setValue(evt.target.values);
+        setValueForm(evt.target.values);
         actions.resetForm();
       }}
     >
@@ -47,7 +48,7 @@ export const PhoneForm = ({  }) => {
           <StyledError name="number" component="div" />
         </label>
 
-        <button type="submit" onClick={() => dispatch(newContact(value))}>Add contact</button>
+        <button type="submit" onClick={() => dispatch(newContact(valueForm))}>Add contact</button>
       </StyledForm>
     </Formik>
   );

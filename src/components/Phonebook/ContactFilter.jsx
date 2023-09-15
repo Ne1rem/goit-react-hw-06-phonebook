@@ -1,14 +1,16 @@
-import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { findContacts } from './FilterSlice';
 
 export const ContactFilter = () => {
-  const [value, setValue] = useState('');
+  const dispatch = useDispatch();
+
   return (
     <div>
       <h2>Find contacts by name</h2>
       <input
         type="text"
-        value={value}
-        onChange={evt => setValue(evt.target.value)}
+        onChange={(evt) => dispatch(findContacts(evt.target.value))}
       ></input>
     </div>
   );
