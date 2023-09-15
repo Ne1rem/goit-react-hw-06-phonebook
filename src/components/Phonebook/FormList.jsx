@@ -1,25 +1,28 @@
+import React from 'react';
 import { ContactFilter } from './ContactFilter';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from './PhoneSlice';
+import { findContacts } from './FilterSlice';
 
-export const ListItem = ({
-  contacts,
-  contactFilter,
-  onChangeContact,
-  onDeleteContact,
-}) => {
+
+
+export const ListItem = ({ contacts, contactFilter }) => {
+  const dispatch = useDispatch();
+
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(contactFilter.toLowerCase())
   );
 
   return (
     <div>
-      <ContactFilter value={contactFilter} onChange={onChangeContact} />
+      <ContactFilter onChange={() => dispatch(findContacts(value))} value={contactFilter} />
       <ul>
         {filteredContacts.map(contact => (
           <li key={contact.id}>
             {contact.name}: {contact.number}
-            <button onClick={() => onDeleteContact(contact.id)}>Delete</button>
+            <button onClick={() => dispatch(deleteContact(contact.id))}>Delete</button>
           </li>
-        ))}
+        ))} 
       </ul>
     </div>
   );

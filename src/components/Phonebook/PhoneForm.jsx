@@ -1,6 +1,9 @@
 import { Formik } from 'formik';
 import { StyledForm, StyledField, StyledError } from './PhoneForm.styled';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { newContact } from './PhoneSlice';
+import { useState } from 'react';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -17,16 +20,18 @@ const schema = Yup.object().shape({
     .max(50, 'Too Long!'),
 });
 
-export const PhoneForm = ({ onAdd }) => {
+export const PhoneForm = ({  }) => {
+  const [value, setValue]= useState('')
+  const dispatch =useDispatch()
   return (
     <Formik
       initialValues={{
-        name: '',
+        name: '', 
         number: '',
       }}
       validationSchema={schema}
-      onSubmit={(values, actions) => {
-        onAdd(values);
+      onSubmit={(actions,evt) => {
+        setValue(evt.target.values);
         actions.resetForm();
       }}
     >
@@ -42,7 +47,7 @@ export const PhoneForm = ({ onAdd }) => {
           <StyledError name="number" component="div" />
         </label>
 
-        <button type="submit">Add contact</button>
+        <button type="submit" onClick={() => dispatch(newContact(value))}>Add contact</button>
       </StyledForm>
     </Formik>
   );
