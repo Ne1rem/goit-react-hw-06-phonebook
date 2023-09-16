@@ -2,8 +2,8 @@ import { Formik } from 'formik';
 import { StyledForm, StyledField, StyledError } from './PhoneForm.styled';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { newContact } from './PhoneSlice';
-import { useState } from 'react';
+import { newContact } from './PhoneSlice'; 
+import { nanoid } from '@reduxjs/toolkit';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -21,20 +21,22 @@ const schema = Yup.object().shape({
 });
 
 export const PhoneForm = () => {
-  const [valueForm, setValueForm]= useState('')
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, actions) => {
+    dispatch(newContact(values));
+    actions.resetForm();
+  };
   
   return (
     <Formik
       initialValues={{
+        id: nanoid(),
         name: '', 
         number: '',
       }}
       validationSchema={schema}
-      onSubmit={(actions,evt) => {
-        setValueForm(evt.target.values);
-        actions.resetForm();
-      }}
+      onSubmit={handleSubmit}
     >
       <StyledForm>
         <label>
@@ -48,7 +50,7 @@ export const PhoneForm = () => {
           <StyledError name="number" component="div" />
         </label>
 
-        <button type="submit" onClick={() => dispatch(newContact(valueForm))}>Add contact</button>
+        <button type="submit">Add contact</button>
       </StyledForm>
     </Formik>
   );
