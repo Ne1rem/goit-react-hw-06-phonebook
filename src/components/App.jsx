@@ -1,6 +1,6 @@
 import React from 'react';
-import { PhoneForm } from './Components/PhoneForm';
-import { FormList } from './Components/FormList';
+import { PhoneForm } from './PhoneContacts/PhoneForm';
+import { FormList } from './PhoneContacts/FormList';
 import { Container } from './App.style';
 
 

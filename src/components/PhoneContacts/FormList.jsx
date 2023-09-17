@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContactFilter } from './ContactFilter';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../Redux/PhoneSlice';
+import { deleteContact } from '../../Redux/PhoneSlice';
 
 export const FormList = () => {
   const dispatch = useDispatch();
