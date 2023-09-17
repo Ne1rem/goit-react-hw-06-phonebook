@@ -1,9 +1,9 @@
 import React from 'react';
 import { ContactFilter } from './ContactFilter';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from './PhoneSlice';
+import { deleteContact } from '../Redux/PhoneSlice';
 
-export const ListItem = () => {
+export const FormList = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(state => state.contacts.contacts);

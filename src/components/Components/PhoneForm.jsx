@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import { StyledForm, StyledField, StyledError } from './PhoneForm.styled';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { newContact } from './PhoneSlice'; 
+import { newContact } from '../Redux/PhoneSlice'; 
 import { nanoid } from '@reduxjs/toolkit';
 
 const schema = Yup.object().shape({
